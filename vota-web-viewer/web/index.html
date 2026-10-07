@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>TSE VOTA — Visualizador de Arquitetura</title>
+<link rel="stylesheet" href="/styles.css">
+</head>
+<body>
+<header class="topbar">
+  <div class="brand">
+    <span class="logo">&lt;/&gt;</span>
+    <div>
+      <h1>TSE VOTA</h1>
+      <small>Visualizador de arquitetura · <code>vota_web_wasm.wasm</code></small>
+    </div>
+  </div>
+  <div id="global-stats" class="stats-inline"></div>
+</header>
+
+<div class="layout">
+  <nav class="sidebar" id="nav">
+    <a href="#report"    data-view="report">Relatório</a>
+    <a href="#tree"      data-view="tree">Árvore de fontes</a>
+    <a href="#flow"      data-view="flow">Fluxo de votação</a>
+    <a href="#apuracao"  data-view="apuracao">Apuração &amp; Resultado</a>
+    <a href="#mesario"   data-view="mesario">Poder do mesário</a>
+    <a href="#seguranca" data-view="seguranca">Segurança &amp; integridade</a>
+    <a href="#auditoria" data-view="auditoria">Auditoria (com sigilo)</a>
+    <a href="#sim"       data-view="sim">Simuladores</a>
+    <hr class="navsep">
+    <a href="#overview"  data-view="overview">Visão geral técnica</a>
+    <a href="#functions" data-view="functions">Explorador de funções</a>
+    <a href="#strings"   data-view="strings">Strings</a>
+    <a href="#data"      data-view="data">Dados &amp; SQL</a>
+    <a href="#libraries" data-view="libraries">Bibliotecas</a>
+    <a href="#imp_exp"   data-view="imp_exp">Imports / Exports</a>
+  </nav>
+  <main id="main"></main>
+</div>
+
+<script src="/diagrams.js"></script>
+<script src="/sim.js"></script>
+<script src="/app.js"></script>
+</body>
+</html>
