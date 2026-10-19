@@ -18,7 +18,7 @@ HERE = os.path.dirname(os.path.abspath(__file__))
 DATA = os.path.join(HERE, "data")
 WEB = os.path.join(HERE, "web")
 REPO = os.path.dirname(HERE)
-DCMP = os.path.join(REPO, "vota_web_wasm.dcmp")
+DCMP = os.path.join(HERE, "vota_web_wasm.dcmp")
 
 STATE = {}
 
