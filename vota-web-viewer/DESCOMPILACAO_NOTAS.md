@@ -68,8 +68,10 @@ funções, strings, SQL, fluxo de votação) em `vota-web-viewer/`:
 
 ```sh
 cd vota-web-viewer
+python3 -m venv .venv
+source .venv/bin/activate
+pip install -r requirements.txt
 python3 server.py        # http://127.0.0.1:8099
 ```
 
-Não requer dependências externas (apenas a biblioteca padrão do Python). Veja
-`vota-web-viewer/README.md`.
+O backend usa Flask. Veja `vota-web-viewer/README.md`.

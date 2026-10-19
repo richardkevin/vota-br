@@ -1,8 +1,9 @@
 # TSE VOTA — Visualizador de Arquitetura
 
-Aplicação web local (sem dependências) para **entender** o binário
-`vota_web_wasm.wasm` do TSE VOTA (urna eletrônica): relatório de domínio,
-infográficos, simuladores interativos e explorador de funções.
+Aplicação web para **entender** o binário `vota_web_wasm.wasm` do TSE VOTA
+(urna eletrônica): relatório de domínio, infográficos, simuladores interativos
+e explorador de funções. O backend usa Flask; o frontend é JavaScript puro,
+sem build.
 
 O foco é **votação, apuração, resultado e o papel do mesário**.
 
@@ -10,10 +11,13 @@ O foco é **votação, apuração, resultado e o papel do mesário**.
 
 ```sh
 cd vota-web-viewer
+python3 -m venv .venv
+source .venv/bin/activate
+pip install -r requirements.txt
 python3 server.py            # http://127.0.0.1:8099
 ```
 
-Abra **http://127.0.0.1:8099**. Só requer Python 3.8+ (biblioteca padrão).
+Abra **http://127.0.0.1:8099**. Requer Python 3.9+ e Flask (o deploy usa 3.12).
 
 ## Como o binário foi tornado compreensível
 
@@ -42,9 +46,9 @@ isso, os nomes de função (`f_*`) são ilegíveis. A estrutura foi recuperada d
 
 ## Infográficos e simuladores
 
-- Infográficos em **SVG** (`web/diagrams.js`): camadas, ciclo do mesário,
+- Infográficos em **SVG** (`public/diagrams.js`): camadas, ciclo do mesário,
   habilitação do eleitor, sessão de votação, pipeline de apuração, dados, estados.
-- Simuladores em `web/sim.js`:
+- Simuladores em `public/sim.js`:
   - **Votação** — teclado, branco/corrige/confirma, cargos majoritário/proporcional.
   - **Apuração & BU** — soma de votos, código verificador (ilustrativo), BU assinado.
   - **Mesário** — registrar mesários (limite), habilitar eleitor (biometria/justificar/suspender), justificativa.
@@ -56,22 +60,32 @@ isso, os nomes de função (`f_*`) são ilegíveis. A estrutura foi recuperada d
 
 ```
 vota-web-viewer/
-├── server.py            # servidor HTTP (stdlib) + API JSON
+├── server.py            # app Flask + API JSON
+├── requirements.txt     # dependências do backend (Flask)
+├── vercel.json          # configuração de deploy
 ├── tools/extract.py     # parser do .dcmp -> data/*.json
 ├── tools/analyze.py     # árvore de fontes + agrupamento por domínio
 ├── data/                # dados gerados (JSON)
-├── web/                 # index.html · styles.css · app.js · diagrams.js · sim.js
+├── public/              # index.html · styles.css · app.js · diagrams.js · sim.js
+├── vota_web_wasm.dcmp   # fonte descompilada usada pela API
 └── README.md
 ```
 
 ## Regenerar os dados
 
 ```sh
-python3 tools/extract.py     # a partir de ../vota_web_wasm.dcmp
+python3 tools/extract.py     # a partir de vota_web_wasm.dcmp
 python3 tools/analyze.py     # árvore de fontes + domínio
 ```
 
 Requer `wasm-objdump` (WABT) e `c++filt` no PATH para `extract.py`.
+
+## Deploy no Vercel
+
+O projeto está preparado para deploy via Git com **Root Directory =
+`vota-web-viewer`**. O Vercel detecta Flask automaticamente; não é preciso
+configurar build nem output. O arquivo `vota_web_wasm.dcmp` precisa estar
+commitado no repositório para ser incluído na função.
 
 ## Nota sobre tecnologia do frontend
 

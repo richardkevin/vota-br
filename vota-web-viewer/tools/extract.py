@@ -15,9 +15,8 @@ import sys
 
 HERE = os.path.dirname(os.path.abspath(__file__))
 PROJ = os.path.dirname(HERE)
-REPO = os.path.dirname(PROJ)
-DCMP = os.path.join(REPO, "vota_web_wasm.dcmp")
-WASM = os.path.join(REPO, "vota_web_wasm.wasm")
+DCMP = os.path.join(PROJ, "vota_web_wasm.dcmp")
+WASM = os.path.join(PROJ, "vota_web_wasm.wasm")
 DATA = os.path.join(PROJ, "data")
 
 # imports oficiais do runtime Emscripten contam para o offset dos nomes f_

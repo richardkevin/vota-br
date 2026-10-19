@@ -1,0 +1,10 @@
+{
+  "$schema": "https://openapi.vercel.sh/vercel.json",
+  "regions": ["gru1"],
+  "functions": {
+    "server.py": {
+      "maxDuration": 60,
+      "excludeFiles": "{vota_web_wasm.wasm,tools/**,**/__pycache__/**,**/*.pyc,.venv/**}"
+    }
+  }
+}
